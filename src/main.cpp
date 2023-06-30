@@ -22,9 +22,9 @@ int main()
     int fps = 0;
 
     gp::image viking;
-    viking.setScale(2, 2);
+    viking.setScale(4, 4);
     viking.load("Image/attack1_1.gif", 100, 65);
-    viking.setOrigin(50, 32.5);
+    viking.setOrigin(40, 42.5);
     viking.setPosition(x, y);
     
     setactivepage(0);
@@ -42,17 +42,14 @@ int main()
         
         cleardevice();
 
-        if (GetAsyncKeyState(VK_UP)) y -= 0.1;
-        if (GetAsyncKeyState(VK_DOWN)) y += 0.1;
-        if (GetAsyncKeyState(VK_LEFT)) x -= 0.1;
-        if (GetAsyncKeyState(VK_RIGHT)) x += 0.1;
+        if (GetAsyncKeyState(VK_UP)) y -= 0.5;
+        if (GetAsyncKeyState(VK_DOWN)) y += 0.5;
+        if (GetAsyncKeyState(VK_LEFT)) x -= 0.5;
+        if (GetAsyncKeyState(VK_RIGHT)) x += 0.5;
 
         // circle(x, y, 20);
 
         viking.setPosition(x, y);
-        viking.draw();
-
-        viking.setPosition(x + 300, y + 300);
         viking.draw();
 
         circle(x, y, 20);

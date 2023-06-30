@@ -4,7 +4,7 @@
 namespace gp {
     void image::draw()
     {
-        putimage((m_position.getX() - m_origin.getX()) * m_scale.getX(), (m_position.getY() - m_origin.getY()) * m_scale.getY(), img, XOR_PUT);
+        putimage(m_position.getX() - m_origin.getX() * m_scale.getX(), m_position.getY() - m_origin.getY() * m_scale.getY(), img, XOR_PUT);
     }
 
     void image::load(std::string path, int width, int height)
@@ -20,8 +20,6 @@ namespace gp {
         img = (BITMAP*)malloc(size);
 
         std::cout<<"Image Read"<<std::endl;
-
-        getch();
 
         getimage(0, 0, width * m_scale.getX(), height * m_scale.getY(), img);     
         
