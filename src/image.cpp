@@ -9,8 +9,12 @@ namespace gp {
 
     void image::load(std::string path, int width, int height)
     {
+        this->path = path;
+        this->width = width;
+        this->height = height;
+
         setactivepage(0);
-        setvisualpage(0);
+        cleardevice();
 
         std::cout<<"Loading image: "<<path<<std::endl;
 
@@ -24,5 +28,11 @@ namespace gp {
         getimage(0, 0, width * m_scale.getX(), height * m_scale.getY(), img);     
         
         std::cout<<"Image loaded"<<std::endl;
+    }
+
+    void image::updateImage()
+    {
+        free(img);
+        load(path, width, height);
     }
 }

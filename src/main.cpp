@@ -21,14 +21,14 @@ int main()
     float time = 0;
     int fps = 0;
 
-    gp::image viking;
-    viking.setScale(4, 4);
-    viking.load("Image/attack1_1.gif", 100, 65);
-    viking.setOrigin(40, 42.5);
-    viking.setPosition(x, y);
-    
     setactivepage(0);
     setvisualpage(1);
+
+    gp::image viking;
+    viking.load("Image/attack1_1.gif", 100, 65);
+    viking.setScale(4, 4);
+    viking.setOrigin(40, 42.5);
+    viking.setPosition(x, y);
 
     while(1)
     {
@@ -46,6 +46,11 @@ int main()
         if (GetAsyncKeyState(VK_DOWN)) y += 0.5;
         if (GetAsyncKeyState(VK_LEFT)) x -= 0.5;
         if (GetAsyncKeyState(VK_RIGHT)) x += 0.5;
+
+        if (GetAsyncKeyState(VK_SPACE)) 
+        {
+            if (viking.getScale().getX() != 8) viking.setScale(8, 8);
+        }
 
         // circle(x, y, 20);
 

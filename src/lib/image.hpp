@@ -9,10 +9,13 @@
 namespace gp {
     class image {
         private :
-            vector2 m_origin;
-            vector2 m_position;
-            vector2 m_scale;
+            vector2 m_origin = vector2(0, 0);
+            vector2 m_position = vector2(0, 0);
+            vector2 m_scale = vector2(1, 1);
 
+            std::string path;
+            int width;
+            int height;
             void* img;
 
         public :
@@ -33,8 +36,10 @@ namespace gp {
             void setPosition(vector2 position) { m_position = position; }
             vector2 getPosition() { return m_position; }
 
-            void setScale(float x, float y) { m_scale.setX(x); m_scale.setY(y); }
-            void setScale(vector2 scale) { m_scale = scale; }
+            void setScale(float x, float y) { m_scale.setX(x); m_scale.setY(y); updateImage(); }
+            void setScale(vector2 scale) { m_scale = scale; updateImage(); }
             vector2 getScale() { return m_scale; }
+
+            void updateImage();
     };
 }
