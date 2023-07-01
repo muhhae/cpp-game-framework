@@ -14,9 +14,6 @@ int main()
     srand(time(NULL));
     initwindow(1024, 720, "My Window", 0, 0, true, true);
 
-    float x = 300;
-    float y = 300;
-
     int frameCount = 0;
     float time = 0;
     int fps = 0;
@@ -28,7 +25,12 @@ int main()
     viking.load("Image/attack1_1.gif", 100, 65);
     viking.setScale(4, 4);
     viking.setOrigin(40, 42.5);
-    viking.setPosition(x, y);
+    viking.setPosition(300, 300);
+
+    gp::vector2 position(300 ,300);
+    gp::vector2 moveVector;
+
+    float speed = 0.3;
 
     while(1)
     {
@@ -42,22 +44,24 @@ int main()
         
         cleardevice();
 
-        if (GetAsyncKeyState(VK_UP)) y -= 0.5;
-        if (GetAsyncKeyState(VK_DOWN)) y += 0.5;
-        if (GetAsyncKeyState(VK_LEFT)) x -= 0.5;
-        if (GetAsyncKeyState(VK_RIGHT)) x += 0.5;
+        moveVector = gp::vector2(0, 0);
+
+        if (GetAsyncKeyState(VK_UP)) moveVector += gp::vector2(0, -1);
+        if (GetAsyncKeyState(VK_DOWN)) moveVector += gp::vector2(0, 1);
+        if (GetAsyncKeyState(VK_LEFT)) moveVector += gp::vector2(-1, 0);
+        if (GetAsyncKeyState(VK_RIGHT)) moveVector += gp::vector2(1, 0);
 
         if (GetAsyncKeyState(VK_SPACE)) 
         {
             if (viking.getScale().getX() != 8) viking.setScale(8, 8);
         }
 
-        // circle(x, y, 20);
-
-        viking.setPosition(x, y);
+        
+        position += moveVector * speed;
+        viking.setPosition(position);
         viking.draw();
 
-        circle(x, y, 20);
+        // circle(x, y, 20);
 
         //fps counter
         auto timeEnd = std::chrono::steady_clock::now();
