@@ -16,7 +16,7 @@ namespace gp {
             std::string path;
             int width;
             int height;
-            void* img;
+            BITMAP* img;
 
         public :
             //constructor destructor
@@ -28,16 +28,16 @@ namespace gp {
             void draw();
 
             //get and set
-            void setOrigin(float x, float y) { m_origin.setX(x); m_origin.setY(y); }
+            void setOrigin(double x, double y) { m_origin.setX(x); m_origin.setY(y); }
             void setOrigin(vector2 origin) { m_origin = origin; }
             vector2 getOrigin() { return m_origin; }
 
-            void setPosition(float x, float y) { m_position.setX(x); m_position.setY(y); }
+            void setPosition(double x, double y) { m_position.setX(x); m_position.setY(y); }
             void setPosition(vector2 position) { m_position = position; }
             vector2 getPosition() { return m_position; }
 
-            void setScale(float x, float y) { m_scale.setX(x); m_scale.setY(y); updateImage(); }
-            void setScale(vector2 scale) { m_scale = scale; updateImage(); }
+            void setScale(double x, double y) { vector2 scale = vector2(x, y); setScale(scale); }
+            void setScale(vector2 scale);
             vector2 getScale() { return m_scale; }
 
             void updateImage();

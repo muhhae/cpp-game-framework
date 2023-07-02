@@ -35,4 +35,14 @@ namespace gp {
         free(img);
         load(path, width, height);
     }
+
+    void image::setScale(vector2 scale)
+    {
+        if (m_scale == scale) return;
+
+        // std::cout<<"Scale changed"<<std::endl;
+        m_scale = scale; 
+        // std::cout << "error in updateImage" << std::endl;
+        updateImage();
+    }
 }

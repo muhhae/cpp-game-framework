@@ -6,16 +6,19 @@
 #include <unistd.h>
 
 #include "lib/image.hpp"
+#include "lib/gameTime.hpp"
 
 int main()
 {
+    gp::Timer Time;
+
     int page = 0;
 
     srand(time(NULL));
     initwindow(1024, 720, "My Window", 0, 0, true, true);
 
     int frameCount = 0;
-    float time = 0;
+    double time = 0;
     int fps = 0;
 
     setactivepage(0);
@@ -29,20 +32,20 @@ int main()
 
     gp::vector2 position(300 ,300);
     gp::vector2 moveVector;
+    gp::vector2 scale(4, 4);
 
-    float speed = 0.3;
+    double speed = 1000;
 
     while(1)
     {
-        //time count start
-        auto timeStart = std::chrono::steady_clock::now();
+        Time.start();
 
-        //main game loop    
-        setactivepage(page);
-        setvisualpage(1 - page);
+        setactivepage(page + 1);
+        setvisualpage(1 - page + 1);
         page = 1 - page;
         
         cleardevice();
+        //main game loop    
 
         moveVector = gp::vector2(0, 0);
 
@@ -51,24 +54,19 @@ int main()
         if (GetAsyncKeyState(VK_LEFT)) moveVector += gp::vector2(-1, 0);
         if (GetAsyncKeyState(VK_RIGHT)) moveVector += gp::vector2(1, 0);
 
-        if (GetAsyncKeyState(VK_SPACE)) 
-        {
-            if (viking.getScale().getX() != 8) viking.setScale(8, 8);
-        }
-
+        if (GetAsyncKeyState(VK_SPACE)) scale += gp::vector2(0.1, 0.1);
         
-        position += moveVector * speed;
+        viking.setScale(scale);
+
+        position += moveVector * speed * Time.deltaTime();
         viking.setPosition(position);
         viking.draw();
 
-        // circle(x, y, 20);
+        circle(viking.getPosition().getX(), viking.getPosition().getY(), 20);
 
-        //fps counter
-        auto timeEnd = std::chrono::steady_clock::now();
-        float deltaTime = std::chrono::duration_cast<std::chrono::nanoseconds>(timeEnd - timeStart).count();
-
+        // fps counter
         frameCount++;
-        time += deltaTime / 1000000000;
+        time += Time.deltaTime();
 
         if (time >= 1) 
         {
@@ -87,7 +85,9 @@ int main()
         outtextxy(50, 10, fps_show);
 
         delete fps_show;
+
+        Time.end();
+        std::cout<<"delta : "<<Time.deltaTime()<<std::endl;
     }   
 
 }
-
