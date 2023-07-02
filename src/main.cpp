@@ -4,16 +4,18 @@ class myGame : public gp::Game
 {
     private:
         //game Variables
-        gp::image viking;
         gp::vector2 position = gp::vector2(300 ,300);
         gp::vector2 moveVector;
         gp::vector2 scale = gp::vector2(4, 4);
         double speed = 300;
+
+        gp::animation viking; 
         
     public:
         void start()
         {
-            viking.load("Image/attack1_1.gif", 100, 65);
+            viking.load("Image/viking/animation/idle", 100, 65, 6);
+            viking.setFrameRate(6);
             viking.setScale(4, 4);
             viking.setOrigin(40, 42.5);
             viking.setPosition(300, 300);
@@ -28,14 +30,15 @@ class myGame : public gp::Game
             if (GetAsyncKeyState(VK_RIGHT)) moveVector += gp::vector2(1, 0);
 
             if (GetAsyncKeyState(VK_SPACE)) scale += gp::vector2(0.1, 0.1);
-            
+
             viking.setScale(scale);
 
             position += moveVector * speed * Time.deltaTime();
-            viking.setPosition(position);
-            viking.draw();
 
-            circle(viking.getPosition().getX(), viking.getPosition().getY(), 20);
+            viking.setPosition(position);
+            viking.draw(Time.deltaTime());
+
+            if (GetAsyncKeyState(VK_ESCAPE)) exit(0);
         }
 };
 

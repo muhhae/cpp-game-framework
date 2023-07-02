@@ -61,6 +61,7 @@
         "set": "cpp",
         "format": "cpp",
         "fstream": "cpp",
-        "cinttypes": "cpp"
+        "cinttypes": "cpp",
+        "codecvt": "cpp"
     }
 }

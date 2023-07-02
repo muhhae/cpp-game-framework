@@ -9,7 +9,7 @@ namespace gp
     
     void Game::init()
     {
-        initwindow(1024, 720, "My Window", 0, 0, true, true);
+        initwindow(1920 , 1080, "", -11, -11);
 
         setactivepage(0);
         setvisualpage(1);
@@ -52,17 +52,17 @@ namespace gp
             }
 
             Time.end();
-            std::cout<<"delta : "<<Time.deltaTime()<<std::endl;
         }   
     }
 
     void Game::start()
     {
-        
+        std::cout<<"Function Start not found"<<std::endl;
     }
 
     void Game::update() 
     {
-        
+        std::cout<<"Function Update not found"<<std::endl;
     }
+
 }

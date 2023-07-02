@@ -8,6 +8,7 @@
 
 #include "image.hpp"
 #include "gameTime.hpp"
+#include "animation.hpp"
 
 namespace gp
 {
