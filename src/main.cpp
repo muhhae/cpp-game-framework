@@ -9,6 +9,7 @@ class myGame : public gp::Game
         gp::vector2 moveVector;
         gp::vector2 scale = gp::vector2(4, 4);
         double speed = 300;
+        
     public:
         void start()
         {
