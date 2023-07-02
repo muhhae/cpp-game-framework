@@ -22,7 +22,7 @@ namespace gp {
         public :
             animation() { }
             
-            void load(std::string path, int width = INT_MAX, int height = INT_MAX , int frameCount = 1); 
+            void load(std::string path, int width = INT_MAX, int height = INT_MAX); 
             void draw(double deltaTime);
 
             void setOrigin(double x, double y) { m_origin = vector2(x, y); }

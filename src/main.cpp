@@ -14,9 +14,9 @@ class myGame : public gp::Game
     public:
         void start()
         {
-            viking.load("Image/viking/animation/idle", 100, 65, 6);
-            viking.setFrameRate(6);
             viking.setScale(4, 4);
+            viking.load("Image/viking/animation/idle", 100, 65);
+            viking.setFrameRate(6);
             viking.setOrigin(40, 42.5);
             viking.setPosition(300, 300);
         }
@@ -31,7 +31,7 @@ class myGame : public gp::Game
 
             if (GetAsyncKeyState(VK_SPACE)) scale += gp::vector2(0.1, 0.1);
 
-            viking.setScale(scale);
+            // viking.setScale(scale);
 
             position += moveVector * speed * Time.deltaTime();
 

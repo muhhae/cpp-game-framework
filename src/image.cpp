@@ -10,8 +10,8 @@ namespace gp {
 
     void image::load(std::string path, int width, int height)
     {
+        std::cout<<"\n";
         free(img);
-        std::cout<<"Loading image: "<<path<<std::endl;
 
         this->path = path;
         this->width = width;
@@ -21,9 +21,18 @@ namespace gp {
         setactivepage(0);
         cleardevice();
 
-        std::cout<<"Loading image: "<<path<<std::endl;
+        std::cout<<"Loading image: \""<<path<<"\""<<std::endl;
         std::cout<<"Checking if file exists"<<std::endl;
-        std::cout<<path<< (std::filesystem::exists(path) ? " Exists" : " Does not exist")<<std::endl;
+
+        if (std::filesystem::exists(path))
+        {
+            std::cout<<"\""<<path<< "\" Exists"<<std::endl;
+        }
+        else 
+        {
+            std::cout<<"\""<<path<< "\" Does not exist"<<std::endl;
+            return;
+        }
 
         readimagefile(path.c_str(), 0, 0, width * m_scale.getX(), height * m_scale.getY());
         unsigned size = imagesize(0, 0, width * m_scale.getX(), height * m_scale.getY());
@@ -31,7 +40,7 @@ namespace gp {
 
         img = (BITMAP*)malloc(size);
 
-        std::cout<<"Image Read"<<std::endl;
+        std::cout<<"Image read"<<std::endl;
 
         getimage(0, 0, width * m_scale.getX(), height * m_scale.getY(), img);     
         
