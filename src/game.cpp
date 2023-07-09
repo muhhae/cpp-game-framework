@@ -7,9 +7,33 @@ namespace gp
         
     }
     
-    void Game::init()
+    void Game::init(bool fullScreen, vector2 screenSize, std::string title)
     {
-        initwindow(1920 , 1080, "", -11, -11);
+        std::string title_str;
+        
+        int left;
+        int top;
+
+        if (fullScreen) 
+        {
+            std::cout<<"Full Screen"<<std::endl;
+            title_str = "";
+            left = -11;
+            top = -11;
+        }
+        else
+        {
+            std::cout<<"Not Full Screen"<<std::endl;
+            std::cout<<"title : "<<title<<std::endl;
+            title_str = title;
+            std::cout<<"title_str : "<<title_str<<std::endl;
+            left = 0;
+            top = 0;
+        }
+
+        initwindow(screenSize.getX() , screenSize.getY(), title_str.c_str(), left, top);
+        
+        // initwindow(1920 , 1080, "", -11, -11);
 
         setactivepage(0);
         setvisualpage(1);
@@ -27,12 +51,22 @@ namespace gp
 
             //main game loop    
             update();
-
+            if (quit) 
+            {
+                std::cout<<"Quit"<<std::endl;
+                quit = false;
+                return;
+            }
             // fps counter
             if (m_showFPS)
             {
                 frameCount++;
                 time += Time.deltaTime();
+
+                if (fps == 0 && Time.deltaTime() > 0)
+                {
+                    fps = 1 / Time.deltaTime();
+                }
 
                 if (time >= 1) 
                 {

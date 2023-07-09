@@ -3,6 +3,7 @@
 #include <vector>
 
 #include "image.hpp"
+#include "gameTime.hpp"
 
 namespace gp {
     class animation
@@ -23,7 +24,7 @@ namespace gp {
             animation() { }
             
             void load(std::string path, int width = INT_MAX, int height = INT_MAX); 
-            void draw(double deltaTime);
+            void draw(Timer & Time);
 
             void setOrigin(double x, double y) { m_origin = vector2(x, y); }
             void setOrigin(vector2 origin) { m_origin = origin; }

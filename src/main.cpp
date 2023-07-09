@@ -31,14 +31,14 @@ class myGame : public gp::Game
 
             if (GetAsyncKeyState(VK_SPACE)) scale += gp::vector2(0.1, 0.1);
 
-            // viking.setScale(scale);
+            viking.setScale(scale);
 
             position += moveVector * speed * Time.deltaTime();
 
             viking.setPosition(position);
-            viking.draw(Time.deltaTime());
+            viking.draw(Time);
 
-            if (GetAsyncKeyState(VK_ESCAPE)) exit(0);
+            if (GetAsyncKeyState(VK_ESCAPE) & 0x8000) quit = true;
         }
 };
 
@@ -47,5 +47,6 @@ int main()
     myGame game;
     game.showFPS();
     game.init();
+    
     return 0;
 }

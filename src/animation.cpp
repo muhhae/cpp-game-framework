@@ -1,4 +1,5 @@
 #include "lib/animation.hpp"
+
 #include <iostream>
 #include <filesystem>
 
@@ -24,7 +25,7 @@ namespace gp {
         }   
     }
 
-    void animation::draw(double deltaTime)
+    void animation::draw(Timer & Time)
     {
         if (frames.empty()) return;
         
@@ -32,7 +33,7 @@ namespace gp {
         frames[m_currentFrame]->setPosition(m_position);
         frames[m_currentFrame]->draw();
         
-        m_time += deltaTime;
+        m_time += Time.deltaTime();
 
         if (m_time >= 1.0 / m_frameRate)
         {

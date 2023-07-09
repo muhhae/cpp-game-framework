@@ -16,6 +16,7 @@ namespace gp
     {
         protected :
             Timer Time;
+            bool quit = false;
         private :
             int page = 0;
             int frameCount = 0;
@@ -23,10 +24,10 @@ namespace gp
             double time = 0;
 
             bool m_showFPS = 1;
-        
+
         public :
             Game();
-            virtual void init();
+            virtual void init(bool fullScreen = 1, vector2 screenSize = vector2(1920, 1080), std::string title = "My Game");
             virtual void start();
             virtual void update();
 
